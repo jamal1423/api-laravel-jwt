@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TodoController;
 
 /*
@@ -34,6 +35,14 @@ Route::controller(TodoController::class)->group(function () {
     Route::put('todo/{id}', 'update');
     Route::delete('todo/{id}', 'destroy');
 }); 
+
+Route::controller(EmployeeController::class)->group(function(){
+    Route::get('data-employee','halaman_employee');
+    Route::post('add-data-employee','halaman_employee_add');
+    Route::post('detail-data-employee/{id}','halaman_employee_detail');
+    Route::put('update-data-employee/{id}','halaman_employee_update');
+    Route::delete('update-data-employee/{id}','halaman_employee_delete');
+});
 
 // Route::controller(TodoController::class)->middleware("auth:api")->group(function () {
 //     Route::get('todos', 'index');
