@@ -56,6 +56,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'nm' => base64_encode($this->name),
+            'eml' => base64_encode($this->email),
+        ];
     }
 }

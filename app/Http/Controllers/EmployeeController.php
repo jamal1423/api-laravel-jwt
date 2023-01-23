@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class EmployeeController extends Controller
 {
@@ -13,12 +14,23 @@ class EmployeeController extends Controller
     }
 
     public function halaman_employee(){
+        // $payload = JWTAuth::parseToken()->getPayload();
+        // $name=$payload->get('nm');
         $dataEmployee = Employee::all();
+        
+        if($dataEmployee){
+            return response()->json([
+                'code' => 200,
+                'status' => 'OK',
+                'result' => $dataEmployee
+            ], 200);
+        }
+        
         return response()->json([
-            'code' => 200,
-            'status' => 'ok',
-            'result' => $dataEmployee
-        ], 200);
+            'code' => 500,
+            'status' => 'error',
+            'message' => 'data not found',
+        ], 500);
     }
 
     public function halaman_employee_add(Request $request){
@@ -49,7 +61,7 @@ class EmployeeController extends Controller
         if($employee) {
             return response()->json([
                 'code' => 201,
-                'status' => 'ok',
+                'status' => 'OK',
                 'result'    => $employee,  
             ], 201);
         }
@@ -67,7 +79,7 @@ class EmployeeController extends Controller
         if($getEmployee){
             return response()->json([
                 'code' => 200,
-                'status' => 'ok',
+                'status' => 'OK',
                 'result' => $getEmployee,
             ]);
         }

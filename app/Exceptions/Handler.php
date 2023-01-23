@@ -53,8 +53,9 @@ class Handler extends ExceptionHandler
     {
         if ($request->expectsJson()) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
+                'code' => 401,
+                'status' => 'Unauthorized',
+                'message' => 'Invalid token',
             ], 401);
         }
     }
